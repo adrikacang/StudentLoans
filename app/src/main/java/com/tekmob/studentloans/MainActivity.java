@@ -18,12 +18,8 @@ import android.widget.ImageView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.model.LatLng;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +33,6 @@ import com.tekmob.studentloans.adapter.ChatFirebaseAdapter;
 import com.tekmob.studentloans.adapter.ClickListenerChatFirebase;
 import com.tekmob.studentloans.model.ChatModel;
 import com.tekmob.studentloans.model.FileModel;
-import com.tekmob.studentloans.model.MapModel;
 import com.tekmob.studentloans.model.UserModel;
 import com.tekmob.studentloans.util.Util;
 import com.tekmob.studentloans.view.FullScreenImageActivity;
@@ -100,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         StorageReference storageRef = storage.getReferenceFromUrl(Util.URL_STORAGE_REFERENCE).child(Util.FOLDER_STORAGE_IMG);
 
         if (requestCode == IMAGE_GALLERY_REQUEST){
@@ -122,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }
             }
         }else if (requestCode == PLACE_PICKER_REQUEST){
-            if (resultCode == RESULT_OK) {
+          /*  if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
                 if (place!=null){
                     LatLng latLng = place.getLatLng();
@@ -132,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }else{
                     //PLACE IS NULL
                 }
-            }
+            }*/
         }
 
     }
@@ -257,12 +251,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
      * Obter local do usuario
      */
     private void locationPlacesIntent(){
-        try {
+      /*  try {
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
             startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
         } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -329,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }else{
-            userModel = new UserModel(mFirebaseUser.getDisplayName(), mFirebaseUser.getPhotoUrl().toString(), mFirebaseUser.getUid() );
+            userModel = new UserModel(mFirebaseUser.getEmail(), "http://csleague.altrovis.com/Images/PlayerPhotos/Player_213_RM_Adrian_Septiandry.png", mFirebaseUser.getUid() );
             lerMessagensFirebase();
         }
     }

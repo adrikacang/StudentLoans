@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Util {
 
-    public static final String URL_STORAGE_REFERENCE = "gs://studentloans-7344e.appspot.com ";
+    public static final String URL_STORAGE_REFERENCE = "gs://studentloans-7344e.appspot.com";
     public static final String FOLDER_STORAGE_IMG = "images";
 
     public static void initToast(Context c, String message){
