@@ -1,6 +1,7 @@
 package com.tekmob.studentloans.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,9 +21,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.tekmob.studentloans.MainActivity;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.tekmob.studentloans.ChatActivity;
 import com.tekmob.studentloans.R;
 import com.tekmob.studentloans.util.Util;
 
@@ -136,8 +137,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGooogle:" + acct.getId());
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
+        Log.d(TAG, "firebaseAuthWithGooogle:" + acct.getId() + " " + acct.getPhotoUrl());
         mFirebaseAuth.signInWithCredential(GoogleAuthProvider.getCredential(acct.getIdToken(), null))
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -147,7 +148,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Util.initToast(LoginActivity.this,"Authentication failed");
                         } else {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(acct.getDisplayName())
+                                    .setPhotoUri(acct.getPhotoUrl())
+                                    .build();
+                            mFirebaseAuth.getCurrentUser().updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated.");
+                                            }
+                                        }
+                                    });
+                            startActivity(new Intent(LoginActivity.this, ChatActivity.class));
                             finish();
                         }
                     }
@@ -170,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Util.initToast(LoginActivity.this,"Authentication failed");
                         } else {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, ChatActivity.class));
                             finish();
                         }
 

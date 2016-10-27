@@ -28,8 +28,8 @@
         app:cmv_arrowPosition="right"
         app:cmv_backgroundColor="@color/colorAccent"
         app:cmv_backgroundColorPressed="#FFBABABA"
-        app:cmv_contentPadding="10dp"
-        app:cmv_cornerRadius="3dp"
+        app:cmv_contentPadding="4dp"
+        app:cmv_cornerRadius="0dp"
         app:cmv_showArrow="true"
        >
 

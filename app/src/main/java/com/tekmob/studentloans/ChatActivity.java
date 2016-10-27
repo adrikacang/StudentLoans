@@ -45,13 +45,13 @@ import java.util.Date;
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener, ClickListenerChatFirebase {
+public class ChatActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener, ClickListenerChatFirebase {
 
     private static final int IMAGE_GALLERY_REQUEST = 1;
     private static final int IMAGE_CAMERA_REQUEST = 2;
     private static final int PLACE_PICKER_REQUEST = 3;
 
-    static final String TAG = MainActivity.class.getSimpleName();
+    static final String TAG = ChatActivity.class.getSimpleName();
     static final String CHAT_REFERENCE = "chatmodel";
 
     //Firebase and GoogleApiClient
@@ -318,12 +318,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void verificaUsuarioLogado(){
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-
         if (mFirebaseUser == null){
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }else{
-            userModel = new UserModel(mFirebaseUser.getEmail(), "http://csleague.altrovis.com/Images/PlayerPhotos/Player_213_RM_Adrian_Septiandry.png", mFirebaseUser.getUid() );
+            userModel = new UserModel(mFirebaseUser.getEmail(), mFirebaseUser.getPhotoUrl().toString(), mFirebaseUser.getUid() );
             lerMessagensFirebase();
         }
     }
