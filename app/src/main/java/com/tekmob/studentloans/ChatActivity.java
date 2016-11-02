@@ -36,7 +36,6 @@ import com.tekmob.studentloans.model.FileModel;
 import com.tekmob.studentloans.model.UserModel;
 import com.tekmob.studentloans.util.Util;
 import com.tekmob.studentloans.view.FullScreenImageActivity;
-import com.tekmob.studentloans.view.LoginActivity;
 
 import java.io.File;
 import java.util.Calendar;
@@ -77,6 +76,7 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

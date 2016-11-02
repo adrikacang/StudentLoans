@@ -23,11 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".LoginActivity" />
         <activity
             android:theme="@style/AppThemeFullScreenImage"
             android:name=".view.FullScreenImageActivity">
         </activity>
+        <activity
+            android:name=".InvestorHomeActivity"
+            android:theme="@style/TimeLineTheme">
+        </activity>>
+        <activity android:name=".StudentHomeActivity"
+            />
     </application>
 
 </manifest>

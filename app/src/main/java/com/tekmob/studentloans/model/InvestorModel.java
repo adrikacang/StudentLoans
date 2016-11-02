@@ -3,39 +3,46 @@ package com.tekmob.studentloans.model;
 /**
  * Created by Asus on 10/27/2016.
  */
-public class InvestorModel {
+public class InvestorModel extends UserModel {
 
-    private String name;
-    private String description;
-    private String id;
+    long fundPrice;
+    String companyDescription;
+    String criteria;
 
-    public InvestorModel(String name, String description, String id) {
-        this.name = name;
-        this.description = description;
-        this.id = id;
+    public InvestorModel(long fundPrice, String companyDescription, String criteria) {
+        this.fundPrice = fundPrice;
+        this.companyDescription = companyDescription;
+        this.criteria = criteria;
     }
 
-    public String getName() {
-        return name;
+    public InvestorModel(String name, String photo_profile, String id, long fundPrice, String companyDescription, String criteria) {
+        super(name, photo_profile, id);
+        this.fundPrice = fundPrice;
+        this.companyDescription = companyDescription;
+        this.criteria = criteria;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public long getFundPrice() {
+        return fundPrice;
     }
 
-    public String getDescription() {
-        return description;
+    public void setFundPrice(long fundPrice) {
+        this.fundPrice = fundPrice;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getCompanyDescription() {
+        return companyDescription;
     }
 
-    public String getId() {
-        return id;
+    public void setCompanyDescription(String companyDescription) {
+        this.companyDescription = companyDescription;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
     }
 }
